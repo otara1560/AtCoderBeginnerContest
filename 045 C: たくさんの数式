@@ -1,0 +1,22 @@
+def Something(s):
+    n = len(s) - 1 
+    sumAll = 0
+    for i in range(1<<n):
+        temp = ""
+        subsum = []
+        if i == 0:
+            subsum.append(int(s))
+        index = -1
+        for j in range(n):
+            if i & 1<<j:
+                subsum.append(int(s[n - j:n-index]))
+                temp = s[0:n-j]
+                index = j
+        if temp != "":
+            subsum.append(int(temp))
+        #print(subsum)
+        sumAll += sum(subsum)
+    return sumAll
+
+s = input()
+print(Something(s))
