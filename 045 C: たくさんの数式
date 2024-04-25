@@ -20,3 +20,34 @@ def Something(s):
 
 s = input()
 print(Something(s))
+
+
+### ChatGPTの回答
+def main():
+    # 入力を受け取る
+    S = input().strip()
+    N = len(S)
+
+    # N-1 箇所の隙間に「+」を入れるかどうかをすべて試す
+    res = 0
+    for bit in range(1 << (N - 1)):
+        # tmp：「+」と「+」との間の値を表す変数
+        tmp = 0
+        for i in range(N - 1):
+            tmp = tmp * 10 + int(S[i])
+
+            # 「+」を挿入するとき、答えに tmp を加算して、tmp を 0 に初期化
+            if bit & (1 << i):
+                res += tmp
+                tmp = 0
+
+        # 最後の「+」から残りの部分を答えに加算
+        tmp = tmp * 10 + int(S[-1])
+        res += tmp
+
+    # 結果を出力
+    print(res)
+
+if __name__ == "__main__":
+    main()
+
