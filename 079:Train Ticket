@@ -1,0 +1,24 @@
+def ticket(x):
+    result = ""
+    N = len(x) - 1
+    for i in range(1<<N):
+        sum = int(x[0])
+        digit = [""] * N
+        for j in range(N):
+            if i & 1<<j:
+                sum += int(x[N-j])
+                digit[N-j-1] = "+"
+            else:
+                sum -= int(x[N-j])
+                digit[N-j-1] = "-"
+            
+        if sum == 7:
+            for i in range(N):
+                result += x[i] + digit[i]
+            result += x[N] + "=7"
+            
+            return result
+    
+x = str(input())
+result = ticket(x)
+print(result)
