@@ -28,6 +28,7 @@ def helper(N,W,A,memo):
             memo[N][W] = helper(N-1, W, A, memo) + helper(N-1, W-A[N-1], A, memo)
         else:
             memo[N][W] = helper(N-1, W, A, memo)
+
     return memo[N][W]
     
 N, W = map(int, input().split())
