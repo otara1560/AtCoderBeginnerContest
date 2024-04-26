@@ -12,3 +12,29 @@ if smth(N,W,A):
     print("Yes")
 else:
     print("No")
+
+# メモ版
+def helper(N,W,A,memo):    
+    if N == 0:
+        if W == 0:
+            return True
+        else:
+            return False
+    
+    if memo[N][W]!= -1:
+        return memo[N][W]
+    else:
+        if W - A[N-1] >= 0:
+            memo[N][W] = helper(N-1, W, A, memo) + helper(N-1, W-A[N-1], A, memo)
+        else:
+            memo[N][W] = helper(N-1, W, A, memo)
+    return memo[N][W]
+    
+N, W = map(int, input().split())
+A = list(map(int, input().split()))
+memo = [[-1] * (W+1) for _ in range(N+1)]
+if helper(N,W,A,memo):
+    print("Yes")
+else:
+    print("No")
+        
